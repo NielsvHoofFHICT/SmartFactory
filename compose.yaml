@@ -1,0 +1,6 @@
+﻿services:
+  challenge-2-factory:
+    image: challenge-2-factory
+    build:
+      context: .
+      dockerfile: challenge-2-factory/Dockerfile
