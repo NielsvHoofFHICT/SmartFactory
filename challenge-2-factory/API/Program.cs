@@ -1,9 +1,9 @@
-using challenge_2_factory.Domain.Interfaces;
-using challenge_2_factory.Infrastructure.Data;
-using challenge_2_factory.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using challenge_2_factory.Domain.Interfaces;
+using challenge_2_factory.Infrastructure.Repositories;
+using challenge_2_factory.Infrastructure.Data;
 
-namespace SmartFactory.API
+namespace challenge_2_factory.API
 {
     public class Program
     {
@@ -13,11 +13,11 @@ namespace SmartFactory.API
 
             builder.Services.AddControllers();
 
-
             builder.Services.AddDbContext<FactoryDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<IMachineActivityRepository, MachineActivityRepository>();
+            builder.Services.AddScoped<IMetricRepository, MetricRepository>();
 
             var app = builder.Build();
 
