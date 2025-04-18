@@ -1,6 +1,25 @@
 ﻿services:
-  challenge-2-factory:
+  api:
     image: challenge-2-factory
     build:
       context: .
       dockerfile: challenge-2-factory/Dockerfile
+      target: build 
+    ports:
+      - "5000:80"
+    volumes:
+      - ./challenge-2-factory:/app 
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - DOTNET_NOLOGO=true
+    command: dotnet watch run --project challenge-2-factory.csproj --no-restore
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped

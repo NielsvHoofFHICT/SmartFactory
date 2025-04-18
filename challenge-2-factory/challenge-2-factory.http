@@ -1,6 +1,6 @@
 @challenge_2_factory_HostAddress = http://localhost:5282
 
-GET {{challenge_2_factory_HostAddress}}/weatherforecast/
+GET {{challenge_2_factory_HostAddress}}/api/Index/
 Accept: application/json
 
 ###

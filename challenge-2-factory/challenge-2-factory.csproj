@@ -21,4 +21,11 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="API\obj\API.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="API\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Infrastructure\obj\Infrastructure.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="Infrastructure\obj\project.assets.json" />
+    </ItemGroup>
+
 </Project>
