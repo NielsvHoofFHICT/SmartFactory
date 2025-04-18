@@ -8,34 +8,28 @@ namespace challenge_2_factory.API.Controllers
     [Route("api/[controller]")]
     public class MachineActivityController(IMachineActivityRepository repository) : ControllerBase
     {
-        private readonly IMachineActivityRepository _repository = repository;
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MachineActivity>>> GetAll()
         {
-            var activities = await _repository.GetAllAsync();
+            var activities = await repository.GetAllAsync();
             return Ok(activities);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<MachineActivity>> GetById(int id)
         {
-            var activity = await _repository.GetByIdAsync(id);
-            if (activity == null)
-            {
-                return NotFound();
-            }
+            var activity = await repository.GetByIdAsync(id);
             return Ok(activity);
         }
 
         [HttpPost]
         public async Task<ActionResult<MachineActivity>> Create(MachineActivity activity)
         {
-            var createdActivity = await _repository.AddAsync(activity);
+            var createdActivity = await repository.AddAsync(activity);
             return CreatedAtAction(nameof(GetById), new { id = createdActivity.Id }, createdActivity);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, MachineActivity activity)
         {
             if (id != activity.Id)
@@ -45,7 +39,7 @@ namespace challenge_2_factory.API.Controllers
 
             try
             {
-                await _repository.UpdateAsync(activity);
+                await repository.UpdateAsync(activity);
             }
             catch
             {
@@ -55,17 +49,17 @@ namespace challenge_2_factory.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _repository.DeleteAsync(id);
+            await repository.DeleteAsync(id);
             return NoContent();
         }
 
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<MachineActivity>>> SearchByMachineName([FromQuery] string machineName)
         {
-            var activities = await _repository.SearchByMachineNameAsync(machineName);
+            var activities = await repository.SearchByMachineNameAsync(machineName);
             return Ok(activities);
         }
 
@@ -74,7 +68,7 @@ namespace challenge_2_factory.API.Controllers
             [FromQuery] DateTime startDate,
             [FromQuery] DateTime endDate)
         {
-            var activities = await _repository.GetByDateRangeAsync(startDate, endDate);
+            var activities = await repository.GetByDateRangeAsync(startDate, endDate);
             return Ok(activities);
         }
     }

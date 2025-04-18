@@ -9,7 +9,6 @@ A C# Web API application for tracking and managing machine activities in a smart
 - Filter activities by date range
 - RESTful API endpoints for CRUD operations
 - SQLite database for data persistence
-- Swagger UI for API documentation
 
 ## Architecture
 
@@ -62,12 +61,7 @@ The application uses SQLite for data persistence. The database file (`SmartFacto
 
 ## Testing
 
-To test the API:
 
-1. Use the Swagger UI to make requests
-2. Test CRUD operations
-3. Verify search and filtering functionality
-4. Check error handling
 
 ## Future Improvements
 

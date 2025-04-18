@@ -7,51 +7,49 @@ namespace challenge_2_factory.Infrastructure.Repositories
 {
     public class MachineActivityRepository(FactoryDbContext context) : IMachineActivityRepository
     {
-        private readonly FactoryDbContext _context = context;
-
         public async Task<IEnumerable<MachineActivity>> GetAllAsync()
         {
-            return await _context.MachineActivities.ToListAsync();
+            return await context.MachineActivities.ToListAsync();
         }
 
         public async Task<MachineActivity> GetByIdAsync(int id)
         {
-            return await _context.MachineActivities.FindAsync(id) ?? throw new Exception("Machine activity not found");
+            return await context.MachineActivities.FindAsync(id) ?? throw new Exception("Machine activity not found");
         }
 
         public async Task<MachineActivity> AddAsync(MachineActivity activity)
         {
-            _context.MachineActivities.Add(activity);
-            await _context.SaveChangesAsync();
+            context.MachineActivities.Add(activity);
+            await context.SaveChangesAsync();
             return activity;
         }
 
         public async Task UpdateAsync(MachineActivity activity)
         {
-            _context.Entry(activity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            context.Entry(activity).State = EntityState.Modified;
+            await context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var activity = await _context.MachineActivities.FindAsync(id);
+            var activity = await context.MachineActivities.FindAsync(id);
             if (activity != null)
             {
-                _context.MachineActivities.Remove(activity);
-                await _context.SaveChangesAsync();
+                context.MachineActivities.Remove(activity);
+                await context.SaveChangesAsync();
             }
         }
 
         public async Task<IEnumerable<MachineActivity>> SearchByMachineNameAsync(string machineName)
         {
-            return await _context.MachineActivities
+            return await context.MachineActivities
                 .Where(a => a.MachineName.Contains(machineName))
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<MachineActivity>> GetByDateRangeAsync(DateTime startDate, DateTime endDate)
         {
-            return await _context.MachineActivities
+            return await context.MachineActivities
                 .Where(a => a.StartTime >= startDate && a.StartTime <= endDate)
                 .ToListAsync();
         }

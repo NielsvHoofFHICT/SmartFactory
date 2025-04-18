@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace challenge_2_factory.Infrastructure.Data
 {
-
     public class FactoryDbContext(DbContextOptions<FactoryDbContext> options) : DbContext(options)
     {
         public DbSet<MachineActivity> MachineActivities { get; set; }
         public DbSet<Metric> Metrics { get; set; }
+
+        public DbSet<Machine> Machines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

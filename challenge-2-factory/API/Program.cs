@@ -18,6 +18,7 @@ namespace challenge_2_factory.API
 
             builder.Services.AddScoped<IMachineActivityRepository, MachineActivityRepository>();
             builder.Services.AddScoped<IMetricRepository, MetricRepository>();
+            builder.Services.AddScoped<IMachineRepository, MachineRepository>();
 
             var app = builder.Build();
 
@@ -34,4 +35,4 @@ namespace challenge_2_factory.API
             app.Run();
         }
     }
-} 
+}
