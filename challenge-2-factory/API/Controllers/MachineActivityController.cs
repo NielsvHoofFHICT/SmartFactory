@@ -19,6 +19,12 @@ namespace challenge_2_factory.API.Controllers
         public async Task<ActionResult<MachineActivity>> GetById(int id)
         {
             var activity = await repository.GetByIdAsync(id);
+
+            if (activity == null)
+            {
+                return NotFound();
+            }
+            
             return Ok(activity);
         }
 

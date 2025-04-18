@@ -19,6 +19,12 @@ namespace challenge_2_factory.API.Controllers
         public async Task<ActionResult<Metric>> GetById(int id)
         {
             var metric = await repository.GetByIdAsync(id);
+
+            if (metric == null)
+            {
+                return NotFound();
+            }
+
             return Ok(metric);
         }
 

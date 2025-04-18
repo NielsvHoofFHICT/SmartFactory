@@ -22,6 +22,11 @@ public class MachineController(IMachineRepository repository) : ControllerBase
     {
         var machine = await repository.GetMachineByIdAsync(id);
 
+        if (machine == null)
+        {
+            return NotFound();
+        }
+
         return Ok(machine);
     }
 
